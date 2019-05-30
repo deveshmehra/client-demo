@@ -78,12 +78,12 @@ public class Main {
 
                 log("Created RC with inline DSL",
                         client.replicationControllers().inNamespace("thisisatest").createNew()
-                                .withNewMetadata().withName("nginx2-controller").addToLabels("server", "nginx").endMetadata()
+                                .withNewMetadata().withName("kunal-nginx").addToLabels("server", "nginx").endMetadata()
                                 .withNewSpec().withReplicas(0)
                                 .withNewTemplate()
                                 .withNewMetadata().addToLabels("server", "nginx2").endMetadata()
                                 .withNewSpec()
-                                .addNewContainer().withName("nginx").withImage("nginx")
+                                .addNewContainer().withName("nginx-container").withImage("nginx")
                                 .addNewPort().withContainerPort(80).endPort()
                                 .endContainer()
                                 .endSpec()
