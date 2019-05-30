@@ -21,10 +21,7 @@ public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args){
-        String master = "https://localhost:8443/";
-        if (args.length == 1) {
-            master = args[0];
-        }
+        String master = "https://192.168.99.100:8443";
 
         Config config = new ConfigBuilder().withMasterUrl(master).build();
         try (final KubernetesClient client = new DefaultKubernetesClient(config)) {
@@ -76,27 +73,6 @@ public class Main {
 
                 log("Created RC", client.replicationControllers().inNamespace("thisisatest").create(rc));
 
-                log("Created RC with inline DSL",
-                        client.replicationControllers().inNamespace("thisisatest").createNew()
-                                .withNewMetadata().withName("kunal-nginx").addToLabels("server", "nginx").endMetadata()
-                                .withNewSpec().withReplicas(0)
-                                .withNewTemplate()
-                                .withNewMetadata().addToLabels("server", "nginx2").endMetadata()
-                                .withNewSpec()
-                                .addNewContainer().withName("nginx-container").withImage("nginx")
-                                .addNewPort().withContainerPort(80).endPort()
-                                .endContainer()
-                                .endSpec()
-                                .endTemplate()
-                                .endSpec().done());
-
-                client.replicationControllers().inNamespace("thisisatest").withName("nginx-controller").scale(8);
-
-                Thread.sleep(1000);
-
-            } finally {
-                client.namespaces().withName("thisisatest").delete();
-                log("Deleted namespace");
             }
 
         } catch (Exception e) {
