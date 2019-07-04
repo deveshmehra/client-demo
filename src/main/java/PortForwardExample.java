@@ -5,16 +5,10 @@ import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
 import io.fabric8.kubernetes.client.LocalPortForward;
 
-import okhttp3.Response;
-import okhttp3.WebSocket;
-import okhttp3.WebSocketListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
-import java.nio.channels.Channel;
-import java.nio.channels.Channels;
 import java.nio.channels.SocketChannel;
 
 public class PortForwardExample {
@@ -28,8 +22,8 @@ public class PortForwardExample {
             String namespace = "default";
             log("namespace", namespace);
             Pod pod = client.pods().inNamespace(namespace).load(PortForwardExample.class.getResourceAsStream("/portforward-example.yml")).get();
-            log("Pod created");
             client.pods().inNamespace(namespace).create(pod);
+            log("Pod created");
 
             int containerPort =  pod.getSpec().getContainers().get(0).getPorts().get(0).getContainerPort();
 
@@ -37,18 +31,9 @@ public class PortForwardExample {
             log("Port forwarded");
 
             int localPort = portForward.getLocalPort();
-            System.out.println(localPort);
             SocketChannel channel = SocketChannel.open();
             channel.connect(new InetSocketAddress("localhost", localPort));
             log(channel.getRemoteAddress().toString());
-            ByteBuffer bb = ByteBuffer.allocate(84);
-            String data = "some data";
-            bb.clear();
-            bb.put(data.getBytes());
-            bb.flip();
-            while(bb.hasRemaining()) {
-                channel.write(bb);
-            }
         } catch (Exception e) {
             log("Exception occurred: ", e.getMessage());
             e.printStackTrace();
