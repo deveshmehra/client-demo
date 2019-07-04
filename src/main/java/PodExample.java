@@ -18,7 +18,7 @@ public class PodExample {
     private static final Logger logger = LoggerFactory.getLogger(PodExample.class);
 
     public static void main(String args[]) {
-        String master = "https://192.168.99.100:8443";
+        String master = "https://192.168.99.101:8443";
 
         Config config = new ConfigBuilder().withMasterUrl(master).build();
         try (final KubernetesClient client = new DefaultKubernetesClient(config)) {

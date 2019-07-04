@@ -27,6 +27,16 @@
             <artifactId>kubernetes-model</artifactId>
             <version>4.2.2</version>
         </dependency>
+        <dependency>
+            <groupId>me.snowdrop</groupId>
+            <artifactId>servicecatalog-client</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>me.snowdrop</groupId>
+            <artifactId>servicecatalog-model</artifactId>
+            <version>1.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>
