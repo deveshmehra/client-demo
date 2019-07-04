@@ -15,7 +15,7 @@ public class PortForwardExample {
     private static final Logger logger = LoggerFactory.getLogger(PortForwardExample.class);
 
     public static void main(String args[]) {
-        String master = "https://192.168.99.101:8443";
+        String master = "https://localhost:8443";
 
         Config config = new ConfigBuilder().withMasterUrl(master).build();
         try (final KubernetesClient client = new DefaultKubernetesClient(config)) {
@@ -31,6 +31,9 @@ public class PortForwardExample {
             log("Port forwarded");
 
             int localPort = portForward.getLocalPort();
+
+            System.out.println(localPort);
+
             SocketChannel channel = SocketChannel.open();
             channel.connect(new InetSocketAddress("localhost", localPort));
             log(channel.getRemoteAddress().toString());
