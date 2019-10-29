@@ -23,13 +23,13 @@ public class PodExample {
         Config config = new ConfigBuilder().withMasterUrl(master).build();
         try (final KubernetesClient client = new DefaultKubernetesClient(config)) {
             String namespace = "default";
-            log("namespace", namespace);
+//            log("namespace", namespace);
             Pod pod = client.pods().inNamespace(namespace).load(PodExample.class.getResourceAsStream("/pod-preset-example.yml")).get();
-            log("Pod created");
+//            log("Pod created");
             client.pods().inNamespace(namespace).create(pod);
 
         } catch (Exception e) {
-            log("Exception occurred: ", e.getMessage());
+//            log("Exception occurred: ", e.getMessage());
             e.printStackTrace();
         }
     }

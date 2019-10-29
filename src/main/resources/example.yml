@@ -1,0 +1,37 @@
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+metadata:
+        name: myns
+        labels:
+                app.kubernetes.io/name:myns
+webhooks:
+        - name: policyeval.myns.io
+          rules:
+                  - apiGroups:
+                            - '*'
+                    apiVersions:
+                            - '*'
+                    operations:
+                            - CREATE
+                    resources:
+                            - pods
+                            - deployments
+                            - replicasets
+                            - replicationcontrollers
+                            - statefulsets
+                            - daemonsets
+          namespaceSelector:
+                  matchExpressions:
+                          - key: namespace.metadata.myns.io/name
+                            operator: NotIn
+                            values:
+                                    - myns
+                                    - kube-system
+                                    - kube-public
+          failurePolicy: Ignore
+          clientConfig:
+                  caBundle: LS0t=
+                  service:
+                          namespace: myns
+                          name: sensor-webhook
+                          path: /admissioncontroller

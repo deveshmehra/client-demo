@@ -1,13 +1,8 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pod-kunal
-  labels:
-    app: website
-    role: frontend
+  name: che-test-pod
 spec:
   containers:
-    - name: website
-      image: nginx
-      ports:
-        - containerPort: 80
+    - name: che-180
+      image: "rhche/ubuntu_jdk8:latest"
