@@ -27,13 +27,13 @@ public class PodLogExample {
   private static final Logger logger = LoggerFactory.getLogger(PodLogExample.class);
 
   public static void main(String[] args) {
-    if (args.length < 1) {
-      System.out.println("Usage: podName [master] [namespace]");
-      return;
-    }
+//    if (args.length < 1) {
+//      System.out.println("Usage: podName [master] [namespace]");
+//      return;
+//    }
     String podName = "che-test-pod";
     String namespace = "default";
-    String master = "https://192.168.99.101:8443/";
+    String master = "https://192.168.99.102:8443/";
 
     if (args.length > 1) {
       master = args[1];
