@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: app-SANDHASH
+  labels:
+    app: app-SANDHASH
+  namespace: dev
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: app-SANDHASH
+    spec:
+      initContainers:
+        - name: init-wait-mongo
+          image: alpine
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: app-SANDHASH
+  namespace: dev
+spec:
+  selector:
+    app: app-SANDHASH
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
+      nodePort: 31080
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: app-configmap-SANDHASH
+  namespace: dev
+

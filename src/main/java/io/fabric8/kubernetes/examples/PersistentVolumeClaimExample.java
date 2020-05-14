@@ -14,11 +14,21 @@
  * limitations under the License.
  */
 
-import io.fabric8.kubernetes.api.model.*;
+package io.fabric8.kubernetes.examples;
+
+import io.fabric8.kubernetes.api.model.Pod;
+import io.fabric8.kubernetes.api.model.NodeSelectorRequirementBuilder;
+import io.fabric8.kubernetes.api.model.PersistentVolume;
+import io.fabric8.kubernetes.api.model.PersistentVolumeBuilder;
+import io.fabric8.kubernetes.api.model.PersistentVolumeClaim;
+import io.fabric8.kubernetes.api.model.PersistentVolumeClaimBuilder;
 import io.fabric8.kubernetes.api.model.storage.StorageClass;
-import io.fabric8.kubernetes.client.Config;
+import io.fabric8.kubernetes.api.model.Quantity;
 import io.fabric8.kubernetes.client.ConfigBuilder;
-import io.fabric8.kubernetes.client.*;
+import io.fabric8.kubernetes.client.Config;
+import io.fabric8.kubernetes.client.DefaultKubernetesClient;
+import io.fabric8.kubernetes.client.KubernetesClient;
+import io.fabric8.kubernetes.client.KubernetesClientException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +39,7 @@ public class PersistentVolumeClaimExample {
   private static final Logger logger = LoggerFactory.getLogger(PersistentVolumeClaimExample.class);
 
   public static void main(String[] args) {
-    String master = "https://192.168.99.101:8443/";
+    String master = "https://192.168.99.100:8443";
     if (args.length == 1) {
       master = args[0];
     }
@@ -38,40 +48,39 @@ public class PersistentVolumeClaimExample {
     Config config = new ConfigBuilder().withMasterUrl(master).build();
     try (final KubernetesClient client = new DefaultKubernetesClient(config)) {
       try {
+
         StorageClass storageClass = client.storage().storageClasses().load(PersistentVolumeClaimExample.class.getResourceAsStream("/test-storage.yml")).get();
         client.storage().storageClasses().create(storageClass);
-        log("Creating PersistentVolume object");
+
         PersistentVolume pv = new PersistentVolumeBuilder()
-                .withNewMetadata().withName("test-local-pv").endMetadata()
-                .withNewSpec()
-                .addToCapacity(Collections.singletonMap("storage", new Quantity("500Gi")))
-                .withAccessModes("ReadWriteOnce")
-                .withPersistentVolumeReclaimPolicy("Retain")
-                .withStorageClassName("my-local-storage")
-                .withNewLocal()
-                .withPath("/mnt/disks/vol1")
-                .endLocal()
-                .withNewNodeAffinity()
-                .withNewRequired()
-                .addNewNodeSelectorTerm()
-                .withMatchExpressions(Arrays.asList(new NodeSelectorRequirementBuilder()
-                        .withKey("kubernetes.io/hostname")
-                        .withOperator("In")
-                        .withValues("my-node")
-                        .build()
-                ))
-                .endNodeSelectorTerm()
-                .endRequired()
-                .endNodeAffinity()
-                .endSpec()
-                .build();
+          .withNewMetadata().withName("test-local-pv").withNamespace("default").endMetadata()
+          .withNewSpec()
+          .addToCapacity(Collections.singletonMap("storage", new Quantity("500Gi")))
+          .withAccessModes("ReadWriteOnce")
+          .withPersistentVolumeReclaimPolicy("Retain")
+          .withStorageClassName("my-local-storage")
+          .withNewLocal()
+          .withPath("/mnt/disks/vol1")
+          .endLocal()
+          .withNewNodeAffinity()
+          .withNewRequired()
+          .addNewNodeSelectorTerm()
+          .withMatchExpressions(Arrays.asList(new NodeSelectorRequirementBuilder()
+            .withKey("kubernetes.io/hostname")
+            .withOperator("In")
+            .withValues("my-node")
+            .build()
+          ))
+          .endNodeSelectorTerm()
+          .endRequired()
+          .endNodeAffinity()
+          .endSpec()
+          .build();
 
         client.persistentVolumes().create(pv);
-        log("Successfully created PersistentVolume object");
 
-        log("Creating PersistentVolumeClaim object");
         PersistentVolumeClaim persistentVolumeClaim = new PersistentVolumeClaimBuilder()
-          .withNewMetadata().withName("test-pv-claim").endMetadata()
+          .withNewMetadata().withName("test-pv-claim").withNamespace("default").endMetadata()
           .withNewSpec()
           .withStorageClassName("my-local-storage")
           .withAccessModes("ReadWriteOnce")
@@ -82,14 +91,13 @@ public class PersistentVolumeClaimExample {
           .build();
 
         client.persistentVolumeClaims().create(persistentVolumeClaim);
-        log("Successfully created PersistentVolumeClaim object");
-        log("Creating pod");
+
         Pod pod = client.pods().load(PersistentVolumeClaimExample.class.getResourceAsStream("/test-pv-pod.yml")).get();
         client.pods().create(pod);
-        log("Successfully created pod");
-      } finally {
-        client.persistentVolumeClaims().withName("test-pv-claim").delete();
-        client.persistentVolumes().withName("test-pv").delete();
+      }
+      finally {
+//        client.persistentVolumeClaims().withName("test-pv-claim").delete();
+//        client.persistentVolumes().withName("test-pv").delete();
       }
     } catch (KubernetesClientException e) {
       log("Could not create resource", e.getMessage());
@@ -103,6 +111,5 @@ public class PersistentVolumeClaimExample {
   private static void log(String action) {
     logger.info(action);
   }
-
 }
 
