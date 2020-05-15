@@ -66,7 +66,7 @@ public class FullExample {
                   log("Skipping jobs example - extensions API group not available");
                 }
 
-                // Create an RC
+                // Create an RC}}
                 ReplicationController rc = new ReplicationControllerBuilder()
                         .withNewMetadata().withName("nginx-controller").addToLabels("server", "nginx").endMetadata()
                         .withNewSpec().withReplicas(3)

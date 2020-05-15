@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="67674355-5737-4774-a4e7-f153fbab3931" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/LoadMultipleDocumentsFromFileExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/LoadMultipleDocumentsFromFileExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PersistentVolumeClaimExample.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PersistentVolumeClaimExampleShort.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PodExample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CreatePod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CreatePod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FullExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FullExample.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +67,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
@@ -88,10 +82,10 @@
       <recent name="$PROJECT_DIR$/src/main/demo" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.PersistentVolumeClaimExample">
-    <configuration name="LoadExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="LoadExample" />
-      <module name="Demo" />
+  <component name="RunManager" selected="Application.CreatePod">
+    <configuration name="CreatePod" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CreatePod" />
+      <module name="kubernetes-client demo" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -131,19 +125,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.LoadExample" />
       <item itemvalue="Application.LoadMultipleDocumentsFromFileExample" />
       <item itemvalue="Application.PodExample" />
       <item itemvalue="Application.PodLogExample" />
       <item itemvalue="Application.PersistentVolumeClaimExample" />
+      <item itemvalue="Application.CreatePod" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CreatePod" />
         <item itemvalue="Application.PersistentVolumeClaimExample" />
         <item itemvalue="Application.LoadMultipleDocumentsFromFileExample" />
         <item itemvalue="Application.PodExample" />
         <item itemvalue="Application.PodLogExample" />
-        <item itemvalue="Application.LoadExample" />
       </list>
     </recent_temporary>
   </component>
@@ -224,7 +218,7 @@
       <workItem from="1589378171640" duration="707000" />
       <workItem from="1589442511242" duration="301000" />
       <workItem from="1589446329571" duration="611000" />
-      <workItem from="1589452076860" duration="3758000" />
+      <workItem from="1589452076860" duration="6667000" />
     </task>
     <servers />
   </component>
@@ -235,6 +229,10 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.yml" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="487" y="238" width="834" height="666" key="#Project_Structure" timestamp="1589529598664">
+      <screen x="0" y="23" width="1792" height="1097" />
+    </state>
+    <state x="487" y="238" width="834" height="666" key="#Project_Structure/0.23.1792.1097@0.23.1792.1097" timestamp="1589529598664" />
     <state x="360" y="233" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585391675928">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
@@ -247,22 +245,22 @@
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
     <state x="733" y="467" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1792.1097@0.23.1792.1097" timestamp="1585391119537" />
-    <state width="1750" height="349" key="GridCell.Tab.0.bottom" timestamp="1586107133770">
+    <state width="1750" height="349" key="GridCell.Tab.0.bottom" timestamp="1589534047782">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
-    <state width="1750" height="349" key="GridCell.Tab.0.bottom/0.23.1792.1097@0.23.1792.1097" timestamp="1586107133770" />
-    <state width="1750" height="349" key="GridCell.Tab.0.center" timestamp="1586107133770">
+    <state width="1750" height="349" key="GridCell.Tab.0.bottom/0.23.1792.1097@0.23.1792.1097" timestamp="1589534047782" />
+    <state width="1750" height="349" key="GridCell.Tab.0.center" timestamp="1589534047780">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
-    <state width="1750" height="349" key="GridCell.Tab.0.center/0.23.1792.1097@0.23.1792.1097" timestamp="1586107133770" />
-    <state width="1750" height="349" key="GridCell.Tab.0.left" timestamp="1586107133769">
+    <state width="1750" height="349" key="GridCell.Tab.0.center/0.23.1792.1097@0.23.1792.1097" timestamp="1589534047780" />
+    <state width="1750" height="349" key="GridCell.Tab.0.left" timestamp="1589534047779">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
-    <state width="1750" height="349" key="GridCell.Tab.0.left/0.23.1792.1097@0.23.1792.1097" timestamp="1586107133769" />
-    <state width="1750" height="349" key="GridCell.Tab.0.right" timestamp="1586107133770">
+    <state width="1750" height="349" key="GridCell.Tab.0.left/0.23.1792.1097@0.23.1792.1097" timestamp="1589534047779" />
+    <state width="1750" height="349" key="GridCell.Tab.0.right" timestamp="1589534047781">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
-    <state width="1750" height="349" key="GridCell.Tab.0.right/0.23.1792.1097@0.23.1792.1097" timestamp="1586107133770" />
+    <state width="1750" height="349" key="GridCell.Tab.0.right/0.23.1792.1097@0.23.1792.1097" timestamp="1589534047781" />
     <state x="384" y="153" key="SettingsEditor" timestamp="1585391490858">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
